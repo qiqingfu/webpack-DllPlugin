@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
+const WebpackAssetsPath = require('./dist/webpack-assets.json')
 
 module.exports = {
   mode: 'production',
@@ -36,7 +37,9 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
-      filename: 'index.html'
+      filename: 'index.html',
+      vendorJsName: WebpackAssetsPath.react.js,
+      title: 'Webpack Dll'
     }),
     // webpack 主配置文件中设置
     // 把只有 dll 的 bundle(们)(dll-only-bundle(s)) 引用到需要的预编译的依赖。

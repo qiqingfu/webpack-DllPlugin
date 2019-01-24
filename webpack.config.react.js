@@ -4,25 +4,33 @@
  *  libtary react react-dom
  */
 
- const path = require('path')
- const webpack = require('webpack')
+const path = require('path')
+const webpack = require('webpack')
+const AssetsPlugin = require('assets-webpack-plugin')
+const packages = require('./package.json')
 
- module.exports = {
-   mode: 'production',
-   entry: {
-     react: ['react', 'react-dom']
-   },
-   output: {
-     filename: '_dll_[name].js',
-     path: path.resolve(__dirname, 'dist'),
-     library: '_dll_[name]',
-     libraryTarget: 'var'
-   },
-   plugins: [
-     // 让 DLLReferencePlugin 映射到相关的依赖上去的
-     new webpack.DllPlugin({
-       name: '_dll_[name]',
-       path: path.resolve(__dirname, 'dist', 'manifest.json')
-     })
-   ]
- }
+const dependencies = Object.keys(packages.dependencies) || []
+
+module.exports = {
+  mode: 'production',
+  entry: {
+    react: dependencies,
+  },
+  output: {
+    filename: '_dll_[name]_[hash:8].js',
+    path: path.resolve(__dirname, 'dist'),
+    library: '_dll_[name]_[hash:8]',
+    libraryTarget: 'var'
+  },
+  plugins: [
+    // 让 DLLReferencePlugin 映射到相关的依赖上去的
+    new webpack.DllPlugin({
+      name: '_dll_[name]_[hash:8]',
+      path: path.resolve(__dirname, 'dist', 'manifest.json')
+    }),
+    new AssetsPlugin({
+      filename: 'webpack-assets.json',
+      path: path.resolve(__dirname, 'dist')
+    })
+  ]
+}
