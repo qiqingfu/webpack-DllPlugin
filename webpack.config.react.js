@@ -28,6 +28,7 @@ module.exports = {
       name: '_dll_[name]_[hash:8]',
       path: path.resolve(__dirname, 'dist', 'manifest.json')
     }),
+    // [hash].js 映射表
     new AssetsPlugin({
       filename: 'webpack-assets.json',
       path: path.resolve(__dirname, 'dist')
