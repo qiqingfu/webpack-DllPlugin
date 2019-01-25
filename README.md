@@ -1,8 +1,10 @@
+### before 
+![before](https://qiqingfu.github.io/webpack-DllPlugin/image/before.png)
 
-
+### after 
+![before](https://qiqingfu.github.io/webpack-DllPlugin/image/after.png)
 
 ## webpack-DllPlugin
-
 项目中使用的生产依赖库, 能不能提前构建好呢? 运行的时候直接通过`script`标签引入。 
 
 `DLLPlugin` 和 `DLLReferencePlugin` 用某种方法实现了拆分 bundles，同时还大大提升了构建的速度。  
@@ -121,7 +123,9 @@ module.exports = {
 
 ```html
 <script src="<%= htmlWebpackPlugin.options.vendorJsName %>"></script>
-``` 
+```  
+
+## end
 
 
 
